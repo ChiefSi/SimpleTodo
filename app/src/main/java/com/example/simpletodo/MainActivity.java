@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
 
@@ -44,8 +45,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void onAddItem(View v) {
         EditText editText = findViewById(R.id.textView);
-        String item = editText.getText().toString();
-        mItems.add(item);
+        //String item = editText.getText().toString();
+        Editable text = editText.getText();
+        String words = text.toString();
+        //mItems.add(item);
+        mItems.add(words);
         mAdapter.notifyDataSetChanged();
         editText.setText("");
     }
