@@ -38,15 +38,19 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new MyAdapter(mItems);
+        mAdapter = new CustomListAdapter(mItems);
         mRecyclerView.setAdapter(mAdapter);
     }
 
     public void onAddItem(View v) {
         EditText editText = findViewById(R.id.textView);
         String item = editText.getText().toString();
-        mItems.add(item);
-        mAdapter.notifyDataSetChanged();
-        editText.setText("");
+        if (!item.isEmpty()) {
+            System.out.println("Adding: " + item);
+            mItems.add(item);
+            System.out.println(mItems);
+            mAdapter.notifyDataSetChanged();
+            editText.setText("");
+        }
     }
 }
