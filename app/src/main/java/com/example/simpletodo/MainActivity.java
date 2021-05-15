@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
@@ -28,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Appbar
+        Toolbar toolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
+
         // Create our array with some data already in
         mItems = new ArrayList<String>();
         mItems.add("First");
@@ -38,15 +43,19 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new MyAdapter(mItems);
+        mAdapter = new CustomListAdapter(mItems);
         mRecyclerView.setAdapter(mAdapter);
     }
 
     public void onAddItem(View v) {
         EditText editText = findViewById(R.id.textView);
         String item = editText.getText().toString();
-        mItems.add(item);
-        mAdapter.notifyDataSetChanged();
-        editText.setText("");
+        if (!item.isEmpty()) {
+            System.out.println("Adding: " + item);
+            mItems.add(item);
+            System.out.println(mItems);
+            mAdapter.notifyDataSetChanged();
+            editText.setText("");
+        }
     }
 }
